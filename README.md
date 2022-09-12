@@ -1,10 +1,13 @@
-# cse110-22w-22
+# cse111-17f-17
 
 [![GitHub license](https://img.shields.io/github/license/vwolfley/cse110-22w-22?style=flat-square)](https://github.com/vwolfley/cse110-22w-22/blob/main/LICENSE)
 
-My repository for BYUI CSE110 class projects
+My repository for BYUI CSE111 class projects
 
-### CSE 110 - Programming Building Blocks
+### CSE 111 - Programming with Functions
+
+#### Topics
+`byui` `cse111` `school` `fall` `school-project` `school-assignments` `school-education` `python3` 
 
 #### Technology
 - This course is using 
