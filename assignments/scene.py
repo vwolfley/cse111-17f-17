@@ -15,6 +15,7 @@
 
 # Import the functions from the Draw 2-D library
 # so that they can be used in this program.
+from tkinter import N
 from draw2d import \
     start_drawing, draw_line, draw_oval, draw_arc, \
     draw_rectangle, draw_polygon, draw_text, finish_drawing,\
@@ -33,33 +34,39 @@ def main():
 
     #### Call drawing functions here ####
     
-
+    ##### DRAW SKY ####
     draw_sky(canvas, scene_width, scene_height)
+    ##### DRAW GROUND ####
     draw_ground(canvas, scene_width, scene_height)
-    # draw_straw(canvas,)
+    ##### DRAW STRAW ####
     draw_straw(canvas, scene_width, scene_height)
-
+    ##### DRAW FOLIAGE ####
     draw_foliage(canvas, scene_width, scene_height)
+
+    ##### DRAW BARN #####
+    # draw_barn(canvas)
+    #####################
     
+    ##### DRAW HAY BALE ####
     # draw_hay_bale(canvas, start, bottom, diameter, interval)
     draw_hay_bale(canvas, 550, 48, 196, 5)
-    draw_hay_bale(canvas, 376, 88, 135, 4)
-    draw_hay_bale(canvas, 134, 105, 98, 2)
-    draw_hay_bale(canvas, 35, 135, 45, 1)
-    draw_hay_bale(canvas, 288, 145, 28, 1)
+    # draw_hay_bale(canvas, 376, 88, 135, 4)
+    # draw_hay_bale(canvas, 134, 105, 98, 2)
+    # draw_hay_bale(canvas, 35, 135, 45, 1)
+    # draw_hay_bale(canvas, 288, 145, 28, 1)
   
 
-    # draw_clouds(canvas, center, bottom, diameter)
-    draw_clouds(canvas, scene_width, scene_height)
-
+    ##### DRAW CLOUDS ####
+    # Options change number of clouds drawn, default=15, change rain=True/False, default=False
+    draw_clouds(canvas, scene_width, scene_height, num_clouds=15, rain=False)
     ##### DRAW BIRDS ####
-    draw_birds(canvas, scene_width, scene_height)
-
-    draw_signature(canvas, scene_width, scene_height)
+    # Options change number of birds to draw, default=10
+    draw_birds(canvas, scene_width, scene_height, num_birds=10)
+    ##### DRAW SIGNATURE ####
+    # Options change text,default="", change color of signature color, default="black"
+    draw_signature(canvas, scene_width, scene_height, "Vern Wolfley", color="gray25")
     
-    ##### DRAW BARN #####
-    #draw_barn(canvas)
-    #####################
+    
     
     #### Draw grid for testing only #####
     #draw_grid(canvas, scene_width, scene_height, 50)
@@ -69,59 +76,64 @@ def main():
 
 
 #### Define functions here ####
-# Draw the sky
+###############################
+#### DRAW THE SKY ####
 def draw_sky(canvas, scene_width, scene_height):
-
     sky_start = int(scene_height / 3)
     lower_sky = (219,240,249)
     upper_sky = (8,66,118)
-
     # draw_vertical_gradient(canvas, x0, y0, color0, x1, y1, color1)
     draw_vertical_gradient(canvas, 0, sky_start, lower_sky, scene_width, scene_height, upper_sky)
 
-# Draw the ground
+#### DRAW THE GROUND ####
 def draw_ground(canvas, scene_width, scene_height):
     draw_rectangle(canvas, 0, 0, scene_width, scene_height / 3, width=0, fill="wheat")
 
-# Draw a hay bale
+#### DRAW HAY BALE ####
 def draw_hay_bale(canvas, start, bottom, diameter, interval):
-    
+    # draw_oval(canvas, x0, y0, x1, y1, width=1, outline="black", fill="")
     for i in range(5):
-        # draw_oval(canvas, x0, y0, x1, y1, width=1, outline="black", fill="")
-        draw_oval(canvas, start, bottom , start + diameter, bottom + diameter, width=1, outline="wheat3", fill="wheat1")
+        draw_oval(canvas, start, bottom , start + diameter, bottom + diameter, width=1, outline="goldenrod4", fill="wheat1")
         start += interval
 
-    #for i in range(0, 5, 1):
-    #    step = 15
-     #   draw_oval(canvas, start + step*i, bottom + step*i, (start + diameter) - step*i, (bottom + diameter) - step*i, width=1, outline="wheat3", fill="wheat1")
+    # for x in range(5):
+    #     incr = 0
+    #     x0 = start + incr
+    #     y0 = bottom + incr
+    #     x1 = (start + diameter) - incr
+    #     y1 = (bottom + diameter) - incr
+    #     draw_oval(canvas, x0, y0, x1, y1, width=1, outline="wheat3", fill="wheat1")
+    #     incr += 15
 
-
-# Draw Birds
+#### DRAW BIRDS ####
 def draw_birds(canvas, scene_width, scene_height, num_birds=15):
     #draw_arc(canvas, x0, y0, x1, y1, start=0, extent=90, width=1, outline="black", fill="")
-    birds = num_birds 
     # Draw 15 birds, each with a random location.
-    for i in range(birds):
-        x = random.randint(0, scene_width-20 )
+    for i in range(num_birds):
+        x = random.randint(0, scene_width-50 )
         y = random.randint(250, scene_height-55)
         draw_arc(canvas, x, y, x+25, y+15, start=360, extent=90, width=1, outline="gray20",)
         draw_arc(canvas, x+25, y, x+50, y+15, start=90, extent=90, width=1, outline="gray20",)
 
-# Draw clouds
-def draw_clouds(canvas, scene_width, scene_height):
+#### DRAW CLOUDS ####
+def draw_clouds(canvas, scene_width, scene_height, num_clouds=15, rain=False):
     sky_height = (scene_height-55)
     min_diam = 100
     max_diam = 300
-    # Draw 15 circles, each with a random location and diameter.
-    for i in range(15):
+    if rain == False:
+        colors = ["white", "gray98", "gray97", "gray96"]
+    else:
+        colors = ["snow3", "gray72", "gray71", "gray70"]
+    # Draw circles, each with a random location and diameter.
+    for i in range(num_clouds):
         x = random.randint(0, scene_width - max_diam)
         y = random.randint(325, sky_height)
         diameter = random.randint(min_diam, max_diam)
-
+        color = random.choice(colors)
         # draw_oval(canvas, x0, y0, x1, y1, width=1, outline="black", fill="")
-        draw_oval(canvas, x, y, x + diameter, y + diameter/4, outline="white", fill="white")
+        draw_oval(canvas, x, y, x + diameter, y + diameter/5, outline=color, fill=color)
 
-# Draw straw
+#### DRAW STRAW ####
 def draw_straw(canvas, scene_width, scene_height):
     # Draw radom blades of straw, each with a random location and height.
     ground_height = round(scene_height / 3)
@@ -129,15 +141,13 @@ def draw_straw(canvas, scene_width, scene_height):
     for i in range(5000):
         x = random.randint(0, scene_width - 1)
         y = random.randint(0, ground_height)
-        height = random.randint(3, 6)
+        height = random.randint(3, 7)
         # draw_rectangle(canvas, x0, y0, x1, y1, width=1, outline="black", fill="")
         draw_rectangle(canvas, x, y, x + 1, y + height, outline="goldenrod3", fill="wheat")
 
-# Draw green grass
+#### DRAW GREEN FOLIAGE ####
 def draw_foliage(canvas, scene_width, scene_height):
-
     ground_height = round(scene_height / 3)
-    
     for i in range(700):
         x = random.randint(0, scene_width - 1)
         y = ground_height
@@ -145,7 +155,7 @@ def draw_foliage(canvas, scene_width, scene_height):
         # draw_rectangle(canvas, x0, y0, x1, y1, width=1, outline="black", fill="")
         draw_rectangle(canvas, x, y, x + 1, y + height, outline="darkGreen", fill="green") 
 
-# Draw barn
+#### DRAW BARN ####
 def draw_barn(canvas):
       #draw_rectangle(canvas, x0, y0, x1, y1, width=1, outline="black", fill="")
     #draw_rectangle(canvas, 175, 135, 295, 210, width=1, outline="black", fill="firebrick4")
@@ -173,20 +183,20 @@ def draw_barn(canvas):
     draw_polygon(canvas, f[0], g[0], f[1], g[1], f[2], g[2], f[3], g[3], width=1, outline="black", fill="slateGray")
 
 
-# Sign artwork with signature
-def draw_signature(canvas, scene_width, scene_height):
+#### SIGN ARTWORK WITH SIGNATURE ####
+def draw_signature(canvas, scene_width, scene_height, signature, color="black"):
     #draw_text(canvas, center_x, center_y, text, fill="black")
-    draw_text(canvas, scene_width - 50, 15, "Vern Wolfley", fill="wheat4")
+    draw_text(canvas, scene_width - 50, 15, signature, fill=color)
 
-# Draw a grid on canvas for locating objects
+#### DRAW A GRID ON THE CANVAS ####
 # For Testing only - Remove for production
+##########################################
 def draw_grid(canvas, width, height, interval, color="blue"):
     # Draw a vertical line at every x interval.
     label_y = 15
     for x in range(interval, width, interval):
         draw_line(canvas, x, 0, x, height, fill=color)
         draw_text(canvas, x, label_y, f"{x}", fill=color)
-
     # Draw a horizontal line at every y interval.
     label_x = 15
     for y in range(interval, height, interval):
