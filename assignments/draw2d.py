@@ -452,6 +452,7 @@ def _make_color(r, g, b):
     return "#" + _hex_str(r) + _hex_str(g) + _hex_str(b)
 
 
+
 def _hex_str(n):
     n = int(round(n, 0))
     assert 0 <= n <= 255

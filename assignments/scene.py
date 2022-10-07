@@ -15,11 +15,12 @@
 
 # Import the functions from the Draw 2-D library
 # so that they can be used in this program.
+from re import I
 from tkinter import N
 from draw2d import \
     start_drawing, draw_line, draw_oval, draw_arc, \
     draw_rectangle, draw_polygon, draw_text, finish_drawing,\
-    draw_horizontal_gradient, draw_vertical_gradient
+    draw_vertical_gradient
 import random
 
 
@@ -49,11 +50,11 @@ def main():
     
     ##### DRAW HAY BALE ####
     # draw_hay_bale(canvas, start, bottom, diameter, interval)
-    draw_hay_bale(canvas, 550, 48, 196, 5)
-    # draw_hay_bale(canvas, 376, 88, 135, 4)
-    # draw_hay_bale(canvas, 134, 105, 98, 2)
-    # draw_hay_bale(canvas, 35, 135, 45, 1)
-    # draw_hay_bale(canvas, 288, 145, 28, 1)
+    draw_hay_bale(canvas, 550, 48, 166, 5)
+    draw_hay_bale(canvas, 386, 88, 115, 4)
+    draw_hay_bale(canvas, 134, 105, 78, 2)
+    draw_hay_bale(canvas, 35, 135, 45, 1)
+    draw_hay_bale(canvas, 288, 145, 28, 1)
   
 
     ##### DRAW CLOUDS ####
@@ -61,19 +62,20 @@ def main():
     draw_clouds(canvas, scene_width, scene_height, num_clouds=15, rain=False)
     ##### DRAW BIRDS ####
     # Options change number of birds to draw, default=10
-    draw_birds(canvas, scene_width, scene_height, num_birds=10)
+    draw_birds(canvas, scene_width, scene_height, num_birds=50)
     ##### DRAW SIGNATURE ####
     # Options change text,default="", change color of signature color, default="black"
     draw_signature(canvas, scene_width, scene_height, "Vern Wolfley", color="gray25")
     
     
     
-    #### Draw grid for testing only #####
-    #draw_grid(canvas, scene_width, scene_height, 50)
+    #### DRAW GRID ###########################
+    # For Testing only - Remove for production
+    ##########################################
+    # draw_grid(canvas, scene_width, scene_height, 50)
 
     # Call the finish_drawing function in the draw2d.py library.
     finish_drawing(canvas)
-
 
 #### Define functions here ####
 ###############################
@@ -92,18 +94,29 @@ def draw_ground(canvas, scene_width, scene_height):
 #### DRAW HAY BALE ####
 def draw_hay_bale(canvas, start, bottom, diameter, interval):
     # draw_oval(canvas, x0, y0, x1, y1, width=1, outline="black", fill="")
-    for i in range(5):
-        draw_oval(canvas, start, bottom , start + diameter, bottom + diameter, width=1, outline="goldenrod4", fill="wheat1")
-        start += interval
-
-    # for x in range(5):
-    #     incr = 0
-    #     x0 = start + incr
-    #     y0 = bottom + incr
-    #     x1 = (start + diameter) - incr
-    #     y1 = (bottom + diameter) - incr
-    #     draw_oval(canvas, x0, y0, x1, y1, width=1, outline="wheat3", fill="wheat1")
-    #     incr += 15
+    
+    ## Draw Shadow ##
+    color ="#4c4c4c"
+    draw_oval(canvas, start+(diameter/2), bottom+2, (start + diameter)+diameter/8, bottom +diameter/8, outline=color, fill=color)
+    ## Draw Bale ##
+    def draw_bale_outer_rings(canvas, start, bottom, diameter, interval):
+        for i in range(5):
+            draw_oval(canvas, start, bottom, start + diameter, bottom + diameter, width=1, outline="goldenrod4", fill="wheat1")
+            start += interval
+            print(start)
+    
+    def draw_bale_inner_rings(canvas, start, bottom, diameter, interval):
+        inc=25
+        x0 = start
+        y0 = bottom
+        x1 = (start + diameter)
+        y1 = (bottom + diameter)
+        for x in range(3,-1,-1):
+            draw_oval(canvas, x0+inc, y0+inc, x1-inc, y1-inc, width=1, outline="purple", fill="")
+            # start += interval
+            inc += 10
+    draw_bale_outer_rings(canvas, start, bottom, diameter, interval)
+    # draw_bale_inner_rings(canvas, start, bottom, diameter, interval)
 
 #### DRAW BIRDS ####
 def draw_birds(canvas, scene_width, scene_height, num_birds=15):
@@ -189,8 +202,7 @@ def draw_signature(canvas, scene_width, scene_height, signature, color="black"):
     draw_text(canvas, scene_width - 50, 15, signature, fill=color)
 
 #### DRAW A GRID ON THE CANVAS ####
-# For Testing only - Remove for production
-##########################################
+###################################
 def draw_grid(canvas, width, height, interval, color="blue"):
     # Draw a vertical line at every x interval.
     label_y = 15
