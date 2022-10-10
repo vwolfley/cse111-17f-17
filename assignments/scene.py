@@ -1,5 +1,5 @@
 ####################
-# Date: 2022-10-01
+# Date: 2022-10-08
 # File: scene.py
 # Author: Vern Wolfley
 # Class: CSE 111
@@ -49,7 +49,7 @@ def main():
     #####################
     
     ##### DRAW HAY BALE ####
-    # draw_hay_bale(canvas, start, bottom, diameter, interval)
+    # draw_hay_bale(canvas, start, bottom, radius, interval)
     draw_hay_bale(canvas, 550, 48, 166, 5)
     draw_hay_bale(canvas, 386, 88, 115, 4)
     draw_hay_bale(canvas, 134, 105, 78, 2)
@@ -68,7 +68,6 @@ def main():
     draw_signature(canvas, scene_width, scene_height, "Vern Wolfley", color="gray25")
     
     
-    
     #### DRAW GRID ###########################
     # For Testing only - Remove for production
     ##########################################
@@ -77,8 +76,10 @@ def main():
     # Call the finish_drawing function in the draw2d.py library.
     finish_drawing(canvas)
 
+###############################
 #### Define functions here ####
 ###############################
+
 #### DRAW THE SKY ####
 def draw_sky(canvas, scene_width, scene_height):
     sky_start = int(scene_height / 3)
@@ -92,31 +93,35 @@ def draw_ground(canvas, scene_width, scene_height):
     draw_rectangle(canvas, 0, 0, scene_width, scene_height / 3, width=0, fill="wheat")
 
 #### DRAW HAY BALE ####
-def draw_hay_bale(canvas, start, bottom, diameter, interval):
+def draw_hay_bale(canvas, start, bottom, radius, interval):
     # draw_oval(canvas, x0, y0, x1, y1, width=1, outline="black", fill="")
-    
+
     ## Draw Shadow ##
-    color ="#4c4c4c"
-    draw_oval(canvas, start+(diameter/2), bottom+2, (start + diameter)+diameter/8, bottom +diameter/8, outline=color, fill=color)
+    def draw_shadow(canvas, start, bottom, radius):
+        color ="#4c4c4c"
+        draw_oval(canvas, start+(radius/2), bottom+2, (start + radius)+radius/8, bottom +radius/8, outline=color, fill=color)
+    
     ## Draw Bale ##
-    def draw_bale_outer_rings(canvas, start, bottom, diameter, interval):
+    def draw_bale_outer_rings(canvas, start, bottom, radius, interval):
         for i in range(5):
-            draw_oval(canvas, start, bottom, start + diameter, bottom + diameter, width=1, outline="goldenrod4", fill="wheat1")
+            draw_oval(canvas, start, bottom, start + radius, bottom + radius, width=1, outline="goldenrod4", fill="wheat1")
             start += interval
             print(start)
     
-    def draw_bale_inner_rings(canvas, start, bottom, diameter, interval):
-        inc=25
-        x0 = start
-        y0 = bottom
-        x1 = (start + diameter)
-        y1 = (bottom + diameter)
-        for x in range(3,-1,-1):
-            draw_oval(canvas, x0+inc, y0+inc, x1-inc, y1-inc, width=1, outline="purple", fill="")
-            # start += interval
-            inc += 10
-    draw_bale_outer_rings(canvas, start, bottom, diameter, interval)
-    # draw_bale_inner_rings(canvas, start, bottom, diameter, interval)
+    # def draw_bale_inner_rings(canvas, start, bottom, radius, interval):
+    #     inc=6
+    #     x0 = start
+    #     y0 = bottom
+    #     x1 = (start + radius)
+    #     y1 = (bottom + radius)
+    #     for x in range(3):
+    #         draw_oval(canvas, x0+inc, y0+inc, x1-inc, y1-inc, width=1, outline="purple", fill="")
+    #         # start += interval
+    #         inc += 10
+    
+    draw_shadow(canvas, start, bottom, radius) 
+    draw_bale_outer_rings(canvas, start, bottom, radius, interval)
+    # draw_bale_inner_rings(canvas, start, bottom, radius, interval)
 
 #### DRAW BIRDS ####
 def draw_birds(canvas, scene_width, scene_height, num_birds=15):
