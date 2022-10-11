@@ -1,5 +1,6 @@
 # Copyright 2020, Brigham Young University-Idaho. All rights reserved.
 
+
 def prefix(string1, string2):
     """Return the prefix, if any, that appears in both string1 and
     string2. In other words, return a string of the characters
@@ -24,8 +25,8 @@ def prefix(string1, string2):
     limit = min(len(string1), len(string2))
     while i < limit:
         if string1[i] != string2[i]:
-           break
-        i += 1
+            break
+            i += 1
 
     # Extract a substring from string1 and return it.
     pre = string1[0 : i]
@@ -64,3 +65,4 @@ def suffix(string1, string2):
     # Extract a substring from string1 and return it.
     suf = string1[i1+1 : ]
     return suf
+
