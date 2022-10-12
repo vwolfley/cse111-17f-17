@@ -1,5 +1,4 @@
-from address import extract_city, \
-    extract_state, extract_zipcode
+from address import extract_city, extract_state, extract_zipcode
 import pytest
 
 
