@@ -74,6 +74,12 @@ def test_get_verb():
         verb = get_verb(0, "past")
         # Verify that the verb returned from get_verb is one of the words in the past_tense_verb list.
         assert verb in past_tense_verb
+    
+    # Call the get_verb function which should return a single past tense verb.
+    for _ in range(11):
+        verb = get_verb(1, "past")
+        # Verify that the verb returned from get_verb is one of the words in the past_tense_verb list.
+        assert verb in past_tense_verb
 
     # test present tense singular verb.  
     # A singular verb is one that has an s added to it in the present tense.
@@ -101,6 +107,12 @@ def test_get_verb():
     # Call the get_verb function which should return a single future tense verb.
     for _ in range(11):
         verb = get_verb(0, "future")
+        # Verify that the verb returned from get_verb is one of the words in the future_tense_verb list.
+        assert verb in future_tense_verb
+
+    # Call the get_verb function which should return a single future tense verb.
+    for _ in range(11):
+        verb = get_verb(1, "future")
         # Verify that the verb returned from get_verb is one of the words in the future_tense_verb list.
         assert verb in future_tense_verb
 
