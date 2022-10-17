@@ -13,14 +13,15 @@ Write and test functions that generate sentences with three parts:
     1. a determiner (sometimes known as an article)
     2. a noun
     3. a verb
+    4. a prepositional phrase
 
 For example:
-    A cat laughed.
-    One man eats.
-    The woman will think.
-    Some girls thought.
-    Many dogs run.
-    Many men will write.
+    One girl talked for the car.
+    A bird drinks off one child.
+    The child will run on the car.
+    Some dogs drank above many rabbits.
+    Some children laugh at many dogs.
+    Some rabbits will talk about some cats.
 
 Write the main function and any other functions 
 that you think are necessary for your program to 
@@ -39,11 +40,11 @@ def main():
 
     """Call the get_random_sentence_generator function
     generate a random number of sentences with specified parameter"""
-    #random_sentence_generator(20)
+    random_sentence_generator(20)
 
     """Call the get_sentence_by_list function
     generate sentences with the parameters specified in the list"""
-    get_sentence_by_list()
+    # get_sentence_by_list()
 
     """Call the get_sentence function
     generate one sentence with parameters specified"""
@@ -62,10 +63,11 @@ def get_sentence(quantity, tense):
     d = get_determiner(quantity).capitalize()
     n = get_noun(quantity)
     v = get_verb(quantity, tense)
+    p = get_prepositional_phrase(quantity)
+    a = get_adverb()
 
-    sentence =(f"{d.capitalize()} {n} {v}.")
+    sentence =(f"{d.capitalize()} {n} {a} {v} {p}.")
     print(sentence)
-
 
 def get_sentence_by_list():
     '''Returns a randomly generated word by calling
@@ -80,8 +82,10 @@ def get_sentence_by_list():
         d = get_determiner(quantity).capitalize()
         n = get_noun(quantity)
         v = get_verb(quantity, tense)
+        p = get_prepositional_phrase(quantity)
+        a = get_adverb()
 
-        sentence =(f"{d.capitalize()} {n} {v}.")
+        sentence =(f"{d.capitalize()} {n} {a} {v} {p}.")
         print(sentence)
 
 def random_sentence_generator(number=7):
@@ -99,10 +103,11 @@ def random_sentence_generator(number=7):
         d = get_determiner(quantity).capitalize()
         n = get_noun(quantity)
         v = get_verb(quantity, tense)
+        p = get_prepositional_phrase(quantity)
+        a = get_adverb()
 
-        sentence =(f"{d.capitalize()} {n} {v}.")
+        sentence =(f"{d.capitalize()} {n} {a} {v} {p}.")
         print(sentence)
-
 
 def get_determiner(quantity):
     """Return a randomly chosen determiner. A determiner is
@@ -128,7 +133,6 @@ def get_determiner(quantity):
     word = random.choice(words)
     return word
 
-
 def get_noun(quantity):
     """Return a randomly chosen noun.
     If quantity == 1, this function will
@@ -153,8 +157,6 @@ def get_noun(quantity):
     # Randomly choose and return a noun.
     noun = random.choice(nouns)
     return noun
-
-
 
 def get_verb(quantity, tense):
     """Return a randomly chosen verb. If tense is "past",
@@ -196,7 +198,85 @@ def get_verb(quantity, tense):
     verb = random.choice(verbs)
     return verb
 
+def get_preposition():
+    """Return a randomly chosen preposition
+    from this list of prepositions:
+        "about", "above", "across", "after", "along",
+        "around", "at", "before", "behind", "below",
+        "beyond", "by", "despite", "except", "for",
+        "from", "in", "into", "near", "of",
+        "off", "on", "onto", "out", "over",
+        "past", "to", "under", "with", "without"
 
+    Return: a randomly chosen preposition.
+    """
+    prepositions = ["about", "above", "across", "after", "along", "around", "at", "before", "behind", "below",
+        "beyond", "by", "despite", "except", "for", "from", "in", "into", "near", "of", "off", "on", "onto", 
+        "out", "over", "past", "to", "under", "with", "without"]
+    # Randomly choose and return a determiner.
+    preposition = random.choice(prepositions)
+    return preposition
+
+def get_prepositional_phrase(quantity):
+    """Build and return a prepositional phrase composed of three
+    words: a preposition, a determiner, and a noun by calling the
+    get_preposition, get_determiner, and get_noun functions.
+
+    Parameter
+        quantity: an integer that determines if the determiner
+            and noun in the prepositional phrase returned from
+            this function are single or plural.
+    Return: a prepositional phrase.
+    """
+    determiner = get_determiner(quantity)
+    noun = get_noun(quantity)
+    preposition = get_preposition()
+    adjective = get_adjective()
+
+    prepositional_phrase = (f"{preposition} {determiner} {adjective} {noun}")
+
+    return prepositional_phrase
+    
+def get_adjective():
+    """Return a randomly chosen adjective
+    from this list of adjectives:
+        "good", "new", "first", "last", "long", 
+        "great", "little", "own", "other", "old", 
+        "right", "big", "high", "different", "small", 
+        "large", "next", "early", "young", "important", 
+        "few", "public", "bad", "same", "able"
+
+    Return: a randomly chosen adjective.
+    """
+    adjectives = ["good", "new", "first", "last", "long", "great", "little", "own", "other", "old", "right", "big", "high", 
+    "different", "small", "large", "next", "early", "young", "important", "few", "public", "bad", "same", "able"]
+
+    # Randomly choose and return a adjective.
+    adjective = random.choice(adjectives)
+    return adjective
+
+def get_adverb():
+    """An adverb is a word or an expression that generally modifies a verb,
+    adjective, another adverb, determiner, clause, preposition, or sentence. 
+    
+    Return a randomly chosen adverb
+    from this list of adverbs:
+        "slowly", "fast", "carefully", "carelessly", "effortlessly", 
+        "urgently", "always", "almost always", "usually", 
+        "often", "sometimes", "occasionally", "seldom", "rarely", 
+        "almost never","never", "quietly", "possibly", "incredibly", 
+        "probably", "luckily", "happily", "angrily", "ironically", "basically"
+
+    Return: a randomly chosen adverb.
+    """
+    adverbs =  ["slowly", "fast", "carefully", "carelessly", "effortlessly", "urgently", "always", "almost always", "usually", 
+    "often", "sometimes", "occasionally", "seldom", "rarely", "almost never","never", "quietly", "possibly", "incredibly", "probably",
+    "luckily", "happily", "angrily", "ironically", "basically"]
+   
+
+    # Randomly choose and return a adjective.
+    adverb = random.choice(adverbs )
+    return adverb
 
 # Call the main function so that
 # this program will start executing.

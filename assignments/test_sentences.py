@@ -7,7 +7,8 @@
 #####################
 
 
-from sentences import get_determiner, get_noun, get_verb
+from sentences import get_determiner, get_noun, get_verb, get_preposition,\
+    get_prepositional_phrase, get_adverb, get_adjective
 import pytest
 
 
@@ -63,8 +64,7 @@ def test_get_noun():
         noun = get_noun(2)
         # Verify that the noun returned from get_noun is one of the words in the plural_nouns list.
         assert noun in plural_nouns
-    
-    
+        
 def test_get_verb():
     # test past tense verbs.
     past_tense_verb = ["drank", "ate", "grew", "laughed", "thought", "ran", "slept", "talked", "walked", "wrote"]
@@ -116,7 +116,70 @@ def test_get_verb():
         # Verify that the verb returned from get_verb is one of the words in the future_tense_verb list.
         assert verb in future_tense_verb
 
+def test_get_preposition():
+    # test prepositions
+    prepositions = ["about", "above", "across", "after", "along", "around", "at", "before", "behind", "below",
+        "beyond", "by", "despite", "except", "for", "from", "in", "into", "near", "of", "off", "on", "onto", 
+        "out", "over", "past", "to", "under", "with", "without"]
+    
+    # Call the get_preposition function which should return a preposition.
+    for _ in range(29):
+        preposition = get_preposition()
+        # Verify that the preposition returned from get_preposition is one of the words in the prepositions list.
+        assert preposition in prepositions
 
+def test_get_prepositional_phrase():
+    prepositions = ["about", "above", "across", "after", "along", "around", "at", "before", "behind", "below",
+        "beyond", "by", "despite", "except", "for", "from", "in", "into", "near", "of", "off", "on", "onto", 
+        "out", "over", "past", "to", "under", "with", "without"]
+
+    single_determiners = ["a", "one", "the"]
+    plural_determiners = ["some", "many", "the"]
+
+    determiners = ["a", "one", "the", "some", "many", "the"]
+
+    single_nouns = ["bird", "boy", "car", "cat", "child", "dog", "girl", "man", "rabbit", "woman"]
+    plural_nouns = ["birds", "boys", "cars", "cats", "children", "dogs", "girls", "men", "rabbits", "women"]
+
+    nouns = ["bird", "boy", "car", "cat", "child", "dog", "girl", "man", "rabbit", "woman", 
+    "birds", "boys", "cars", "cats", "children", "dogs", "girls", "men", "rabbits", "women"]
+
+    for x in range(2):
+        preposition = get_prepositional_phrase(x)
+        split = preposition.split()
+        assert len(split) == 3
+
+        for _ in range(29):
+             assert split[0] in prepositions
+        
+        for _ in range(19):
+            assert split[2] in nouns
+        
+        for _ in range(5):
+            assert split[1] in determiners
+
+def test_get_adverb():
+    # test adverbs
+    adverbs =  ["slowly", "fast", "carefully", "carelessly", "effortlessly", "urgently", "always", "almost always", "usually", 
+    "often", "sometimes", "occasionally", "seldom", "rarely", "almost never","never", "quietly", "possibly", "incredibly", "probably",
+    "luckily", "happily", "angrily", "ironically", "basically"]
+    # len = 25
+    # Call the get_adverb function which should return a adverb.
+    for _ in range(24):
+        adverb = get_adverb()
+        # Verify that the adverbs returned from get_adverb is one of the words in the adverbs list.
+        assert adverb in adverbs
+
+def test_get_adjective():
+    # test adjectives
+    adjectives = ["good", "new", "first", "last", "long", "great", "little", "own", "other", "old", "right", "big", "high", 
+    "different", "small", "large", "next", "early", "young", "important", "few", "public", "bad", "same", "able"]
+    # len = 25
+    # Call the get_adverb function which should return a adjective.
+    for _ in range(24):
+        adjective = get_adjective()
+        # Verify that the adjective returned from get_adjective is one of the words in the adjectives list.
+        assert adjective in adjectives
 
 
 # Call the main function that is part of pytest so that the
