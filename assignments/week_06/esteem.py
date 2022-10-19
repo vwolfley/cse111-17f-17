@@ -22,7 +22,6 @@ Core Requirements
 '''
 
 
-
 def main():
     opening_statement = '''
 This program is an implementation of the Rosenberg
@@ -48,13 +47,13 @@ A means you strongly agree with the statement.
     # neg = ["D", "d", "a", "a", "d"] = [3,2,1,1,2] = 9
     # total = 12 + 9 = 21
     ################################
-    
+
     score = calculate_results(answers)
 
     print(f'''
 Your score is {score}.
 A score below 15 may indicate problematic low self-esteem.''')
-   
+
 
 def ask_questions():
     """Loop though list of questions and collect responses.
@@ -62,7 +61,20 @@ def ask_questions():
     Parameters: None
     Return: a list of strings associated with the users inputted answers
     """
-    list_of_questions = ["I feel that I am a person of worth, at least on an equal plane with others.", "I feel that I have a number of good qualities.", "All in all, I am inclined to feel that I am a failure.", "I am able to do things as well as most other people.", "I feel I do not have much to be proud of.", "I take a positive attitude toward myself.", "On the whole, I am satisfied with myself.", "I wish I could have more respect for myself.", "I certainly feel useless at times.", "At times I think I am no good at all."]
+    list_array = [
+        ("1", "I feel that I am a person of worth, at least on an equal plane with others.", "+")
+        ("2", "I feel that I have a number of good qualities.", "+")
+        ("3", "All in all, I am inclined to feel that I am a failure.", "-")
+        ("4", "I am able to do things as well as most other people.", "+")
+        ("5", "I feel I do not have much to be proud of.", "-")
+        ("6", "I take a positive attitude toward myself.", "+")
+        ("7", "On the whole, I am satisfied with myself.", "+")
+        ("8", "I wish I could have more respect for myself.", "-")
+        ("9", "I certainly feel useless at times.", "-")
+        ("10", "At times I think I am no good at all.", "-")
+    ]
+    list_of_questions = ["I feel that I am a person of worth, at least on an equal plane with others.", "I feel that I have a number of good qualities.", "All in all, I am inclined to feel that I am a failure.", "I am able to do things as well as most other people.",
+                         "I feel I do not have much to be proud of.", "I take a positive attitude toward myself.", "On the whole, I am satisfied with myself.", "I wish I could have more respect for myself.", "I certainly feel useless at times.", "At times I think I am no good at all."]
 
     list_of_options = '''
     Do you:
@@ -74,10 +86,11 @@ def ask_questions():
 
     answers = []
     for q in list_of_questions:
-       questions = input(f"\n {q}\n {list_of_options}")
-       answers += [questions]
-    
+        questions = input(f"\n {q}\n {list_of_options}")
+        answers += [questions]
+
     return answers
+
 
 def calculate_results(answers):
     """Calculate the users response into a numerical score.
@@ -115,7 +128,7 @@ def calculate_results(answers):
             neg_score += [0]
         else:
             None
-    
+
     pos_sum = sum(pos_score)
     neg_sum = sum(neg_score)
 
@@ -127,7 +140,12 @@ def calculate_results(answers):
     return score
 
 
-
+def get_valid_response():
+    response = input('Your response (D, d, a, A): ')
+    while response not in ['D', 'd', 'a', 'A']:
+        print('Do you "Strongly Disagree" ("D"), "Disagree" ("d"), "Agree" ("a"), or "Strongly Agree" ("A")?')
+        response = input('Your response (D, d, a, A): ')
+    return response
 
 
 # Call the main function so that

@@ -1,9 +1,9 @@
 ####################
-# Date: 2022-10-08
+# Date: 2022-10-22
 # File: sentences.py
 # Author: Vern Wolfley
 # Class: CSE 111
-# Purpose: 05 Prove Milestone: Testing and Fixing Functions
+# Purpose: 06 Prove Milestone: Testing and Fixing Functions
 #####################
 
 import random
@@ -37,6 +37,14 @@ f.	plural	future
 """
 
 def main():
+    """
+    This program generates simple English sentences.
+    This program has three different methods to generate those simple English sentences.
+      
+    (1) It can call the function random_sentence_generator to specify any specified parameters as the number of sentences.
+    (2) It can call the function get_sentence_by_list, this will generate the specified number of sentences as required in the assignment.
+    (3) It can call the function get_sentence, an it will generate one sentence at a time with the specified parameters.
+    """
 
     """Call the get_random_sentence_generator function
     generate a random number of sentences with specified parameter"""
