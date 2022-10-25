@@ -1,9 +1,9 @@
 ####################
-# Date: 2022-10-08
+# Date: 2022-10-22
 # File: test_sentences.py
 # Author: Vern Wolfley
 # Class: CSE 111
-# Purpose: 05 Prove Milestone: Testing and Fixing Functions
+# Purpose: 06 Prove Milestone: Testing and Fixing Functions
 #####################
 
 
