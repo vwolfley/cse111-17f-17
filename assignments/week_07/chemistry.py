@@ -19,21 +19,29 @@ The main function should do the following:
 
 def main():
 
-    periodic_table = []
-    make_periodic_table(periodic_table)
-    # print(periodic_table)
+    # Call the make_periodic_table function and store the returned list in a variable.
+    periodic_table_list = make_periodic_table()
+    # print(periodic_table_list)
 
-    for i in periodic_table:
-        print(f"{i[1]}, {i[2]}")
+    symbol = 0
+    name = 1
+    atomic_mass = 2
+    # Print the name and atomic mass for each chemical element on a separate line. Do not print the chemical element symbols.
+    print("Name, Atomic Mass")
+    for element in periodic_table_list:
+        print(f"{element[name]}, {element[atomic_mass]}")
+
+    # TEST
+    # print(len(periodic_table_list))
 
     # for symbol, name, atomic_mass in periodic_table:
     #     print(f"{name}, {atomic_mass}")
 
-def make_periodic_table(list):
+def make_periodic_table():
     '''Creates and returns a compound list
-    Parameter
+    Parameter:
         none
-    Return: list
+    Return: periodic_table_list
     '''
     periodic_table_list = [
     # [symbol, name, atomic_mass]
@@ -93,7 +101,7 @@ def make_periodic_table(list):
     ["O", "Oxygen", 15.9994],
     ["Os", "Osmium", 190.23],
     ["P", "Phosphorus", 30.973762],
-    ["Pa", "Protactinium", 231.035,88],
+    ["Pa", "Protactinium", 231.03588],
     ["Pb", "Lead", 207.2],
     ["Pd", "Palladium", 106.42],
     ["Pm", "Promethium", 145],
@@ -132,8 +140,7 @@ def make_periodic_table(list):
     ["Zn", "Zinc", 65.38],
     ["Zr", "Zirconium", 91.224]]
 
-    # symbol, name, atomic_mass
-    list.extend(periodic_table_list)
+    return periodic_table_list
 
 
 
