@@ -4,9 +4,9 @@
 
 My repository for BYUI CSE111 class projects
 
-### CSE 111 - Programming with Functions
+## CSE 111 - Programming with Functions
 
-#### Topics
+### Topics
 `byui` `cse111` `school` `fall` `school-project` `school-assignments` `school-education` `python3`
 
 ---
@@ -17,7 +17,7 @@ My repository for BYUI CSE111 class projects
 
 ---
 
-#### Technology
+### 💻 Technology
 - This course is using 
 
 <a href="https://www.python.org/" title="vscode"><img src="https://github.com/get-icon/geticon/raw/master/icons/python.svg" alt="python" width="31px" height="31px"></a>
