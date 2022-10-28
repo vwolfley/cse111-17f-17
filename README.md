@@ -17,6 +17,14 @@ My repository for BYUI CSE111 class projects
 
 ---
 
+### ⚙ Free Web Dev Tools
+
+- 🔗 [Google Chrome Web Browser](https://google.com/chrome/)
+- 🔗 [Visual Studio Code (aka VS Code)](https://code.visualstudio.com/)
+- 🔗 [Live Server VS Code Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+
+---
+
 ### 💻 Technology
 - This course is using 
 
