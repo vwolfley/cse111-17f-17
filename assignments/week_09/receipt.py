@@ -29,7 +29,8 @@ def main():
     QUANTITY_INDEX = 1
 
     products_dict = read_dict("products.csv", PRODUCT_INDEX)
-    # print(products_dict)
+    print(products_dict)
+    print()
 
     request_list = read_list("request.csv")
     # print(request_list)
@@ -42,8 +43,8 @@ def main():
         if product_number in products_dict:
             name = products_dict[product_number][NAME_INDEX]
             price = products_dict[product_number][PRICE_INDEX]
-            
-        print(f"{name:<15} {quantity:<2} @ ${price}")
+
+        print(f"""{name:<15} {quantity:<2} @ ${price}""")
             
 
 
@@ -138,3 +139,4 @@ def read_list(filename):
 # was simply imported, then skip the call to main.
 if __name__ == "__main__":
     main()
+
