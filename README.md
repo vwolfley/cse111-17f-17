@@ -36,7 +36,14 @@ My repository for BYUI CSE111 class projects
 
 ### 📚 References
 
+- 🔗 [python.org](https://www.python.org/)
+- 🔗 [pandas](https://pandas.pydata.org/)
+- 🔗 [numpy](https://numpy.org/)
+- 🔗 [matplotlib](https://matplotlib.org/)
+- 🔗 [tkinter](https://docs.python.org/3/library/tkinter.html)
+
 ---
+
 ### :warning: Licensing
 
 This project is licensed under the MIT license.
