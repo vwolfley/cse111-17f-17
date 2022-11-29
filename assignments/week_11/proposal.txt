@@ -11,29 +11,47 @@ CSE 111 Proposal for a Student Chosen Program
 
 1. What is the title of your program?
 
+    Student enrollment analysis
+
 2. What real-world problem will your program address or help to solve?
+
+    The Arizona department of Education produces a yearly excel file with student enrollment numbers.  
+    This files data needs to be cleaned and have some basic data visualization performed for analysis.
+    The program will:
+        - import the file
+        - look at the header row titles (making sure data is consistent with previous years)
+        - test each column for data length (prepare to enter into database)
+        - count the number of unique school sites
+        - check for duplicate school sites
+        - do some basic data visualization for data verification
+
+
 
 3. What will you learn from developing this program?
 
+The development of this program will help me to learn data automation techniques to improve my work flows.
+
 4. What Python modules will your program use?
 
-    (Some examples are: csv, datetime, functools, matplotlib, math,
-    pandas, pytest, random, requests, and tkinter.)
+    - csv
+    - datetime
+    - pandas
+    - numpy
+    - pytest
+    - matplotlib
+    - math
+    - re
 
 5. Will you separate your Python program into functions that each
 perform a single task?
 
-    (Remember that the most reusable functions don't get user input and
-    don't print results but instead have parameters and return a result.
-    Functions that get user input and print results are important and do
-    useful work but are not easily reusable.)
-
-    (Remember also that it's hard to test functions that get user input
-    and print results. It's easy to test functions that don't get user
-    input and don't print results but instead have parameters and return
-    a result. Therefore, you should write most of your program functions
-    to have parameters and return a result.)
+    The goal of this program will be to make it as reusable as possible.
+    The functions will be single task functions to allow for maximum flexibility.
+    I am hoping that lessons learned in this project will allow for expanding these process
+    to other data downloads.
 
 6. Will you write test functions to test at least two of your program
 functions?
+
+    Test functions will be written to test at least two program functions.
 
