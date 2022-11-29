@@ -35,3 +35,10 @@ My repository for BYUI CSE111 class projects
 ---
 
 ### 📚 References
+
+---
+### :warning: Licensing
+
+This project is licensed under the MIT license.
+
+-   [LICENSE](LICENSE)
