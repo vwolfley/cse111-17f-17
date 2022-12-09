@@ -1,9 +1,9 @@
 ###########################
-# Date: 2022-11-23
+# Date: 2022-12-10
 # File: schools_grades.py
 # Author: Vern Wolfley
 # Class: CSE 111
-# Purpose:
+# Purpose:  Write a significant Python project
 ###########################
 
 ### Reference Docs
@@ -31,8 +31,6 @@ ethnicity_column_dict = {
     'Multiple Races': ["Multiracial","float64"],
     'Total': ["Total", "float64"]
 }
-NAME_INDEX = 0
-TYPE_INDEX =1
 
 
 def main():
@@ -60,7 +58,7 @@ def main():
 
         # Call check_length_of_data
         check_length_of_data(ee_df)
-
+ 
         # Call check_for_duplicates
         check_for_duplicates(ee_df)
 
@@ -82,8 +80,6 @@ def main():
         # Call export_to_csv
         export_to_csv(ee_df, file_name="schools_by_ethnicity_update")
 
-
-
     except (FileNotFoundError, PermissionError) as error:
         # This code will be executed if the user enters
         # the name of a file that doesn't exist or does not have permissions for.
@@ -97,7 +93,8 @@ def read_enrollment_ethnicity(file_name):
     return the dataframe. Each element in the dataframe will contain
     one line of text from the csv file.
 
-    Parameter filename: the name of the csv file to read
+    Parameters
+        filename: the name of the csv file to read
     Return: a dataframe that contains two-dimensional data and its corresponding labels.
     """
     # Read in file data
@@ -112,13 +109,15 @@ def read_enrollment_ethnicity(file_name):
 def change_column_names(dataframe, dictionary):
     """Change column names to standardized database names
 
-    Parameter dataframe: the name of the dataframe to test
-    Parameter dictionary: the name of the dictionary for data
+    Parameters
+        dataframe: the name of the dataframe to test
+        dictionary: the name of the dictionary for data
     Return: a new dataframe with column names ready for database.
     """
     # define new dataframe for connivance
     df = dataframe
     # read ethnicity_column_dict and create names_dict
+    NAME_INDEX = 0
     names_dict = {}
     for key, value in dictionary.items():
         names_dict[key] = value[NAME_INDEX]
@@ -133,7 +132,8 @@ def change_column_names(dataframe, dictionary):
 def check_for_nulls(dataframe):
     """Check columns that are not float or int for null values.
 
-    Parameter dataframe: the name of the dataframe to test
+    Parameters
+        dataframe: the name of the dataframe to test
     Return: a new dataframe with column names ready for database.
     """
     # define new dataframe for connivance
@@ -157,25 +157,29 @@ def check_length_of_data(dataframe):
     that are not float or int for null values.
     This insures that they will load into database correctly.
 
-    Parameter dataframe: the name of the dataframe to test
+    Parameters
+        dataframe: the name of the dataframe to test
     Return: NOTHING
     """
     # define new dataframe for connivance
     df = dataframe
-
+    length_list = []
     for name in df.columns:
         ob = list(df.select_dtypes(include=['object']).columns)
         if name in ob:
             length = df[name].map(len).max()
+            length_list.append(length)
             print(f"Column: {name:>8}, length = {length}")
     print()
     print(df.info())
+    return length_list
 
 def check_for_duplicates(dataframe):
     """Check for duplicate values in columns SchoolEntityID and DistrictEntityID
     This is a data integrity check.
 
-    Parameter dataframe: the name of the dataframe to test
+    Parameters
+        dataframe: the name of the dataframe to test
     Return: NOTHING
     """
     # define new dataframe for connivance
@@ -194,7 +198,8 @@ def count_unique_sites(dataframe):
     """Find the number of unique values in columns SchoolEntityID and DistrictEntityID
     This is a data integrity check.
 
-    Parameter dataframe: the name of the dataframe to test
+    Parameters
+        dataframe: the name of the dataframe to test
     Return: NOTHING
     """
     # define new dataframe for connivance
@@ -210,7 +215,8 @@ def add_schoolyear(dataframe):
     """Add the column named "SchoolYear" and the data to dataframe
     Data should be the data from column "FiscalYear" ["FiscalYear -1"- "FiscalYear"]
 
-    Parameter dataframe: the name of the dataframe
+    Parameters
+        dataframe: the name of the dataframe
     Return: new dataframe
     """
     # define new dataframe for connivance
@@ -227,7 +233,8 @@ def add_county_fields(dataframe):
     """Add the columns named "CountyEntityID" and "CountyName" to the dataframe
     Empty data fields
 
-    Parameter dataframe: the name of the dataframe
+    Parameters
+        dataframe: the name of the dataframe
     Return: new dataframe
     """
     # define new dataframe for connivance
@@ -242,8 +249,9 @@ def add_import_date(dataframe, import_date):
     """Add the columns named "ImportDate" and the date to the dataframe
     The import date is the date the data was imported and checked.
 
-    Parameter dataframe: the name of the dataframe
-    Parameter import_date: the date of the import
+    Parameters
+        dataframe: the name of the dataframe
+        import_date: the date of the import
     Return: new dataframe
     """
     # define new dataframe for connivance
@@ -254,11 +262,11 @@ def add_import_date(dataframe, import_date):
 
     return df
 
-
 def export_to_csv(dataframe, file_name):
     """Export the final dataframe to csv file
 
-    Parameter dataframe: the name of the dataframe
+    Parameters
+        dataframe: the name of the dataframe
     Return: csv file
     """
     # define new dataframe for connivance

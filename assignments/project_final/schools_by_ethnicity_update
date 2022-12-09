@@ -1,4 +1,4 @@
-FiscalYear,DistrictName,DistrictEntityID,SchoolName,SchoolEntityID,Asian,NativeAmerican,Black,Hispanic,White,PacificIslander,Multiracial,Total,SchoolYear,CountyEntityID,CountyName,ReleaseDate
+FiscalYear,DistrictName,DistrictEntityID,SchoolName,SchoolEntityID,Asian,NativeAmerican,Black,Hispanic,White,PacificIslander,Multiracial,Total,SchoolYear,CountyEntityID,CountyName,ImportDate
 2022,Arizona,,,,34146.0,47580.0,64183.0,532761.0,405759.0,4224.0,44346.0,,2021-2022,,,2022-12-08
 2022,St Johns Unified District,4153.0,Coronado Elementary School,4517.0,,17.0,,75.0,172.0,,,270.0,2021-2022,,,2022-12-08
 2022,St Johns Unified District,4153.0,St Johns Middle School,4710.0,,29.0,,92.0,216.0,,,345.0,2021-2022,,,2022-12-08
