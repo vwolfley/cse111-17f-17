@@ -1,34 +1,46 @@
 ###########################
 # Date: 2022-12-10
-# File: schools_grades.py
+# File: final_project.py
 # Author: Vern Wolfley
 # Class: CSE 111
 # Purpose:  Write a significant Python project
 ###########################
 
-### Reference Docs
-#     - https://towardsdatascience.com/advanced-tips-on-how-to-read-csv-files-into-pandas-84ebb170f6e5
-#     - https://queirozf.com/entries/pandas-dataframe-plot-examples-with-matplotlib-pyplot
+"""
+The Arizona Department of Education publishes many public reports including enrollment data.  
+These reports include the number of students enrolled on the October 1st reporting date.
+The enrollment counts are available at the the following levels:
+    - Statewide
+    - County
+    - District
+    - School
+These reports can further be broken down by demographics, gender, and subgroups.
+This program will work towards making the process of evaluating this data simpler, more automated, and quicker.
+This project will currently only work with the school by grade file.
+"""
 
 from datetime import date
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 
-### Data Reference
+# pd.options.display.max_columns = None
+
+# Data Reference
 ethnicity_column_dict = {
-    'Fiscal Year': ["FiscalYear","int64"], 
-    'LEA Name': ["DistrictName","object"],
-    'LEA Entity ID': ["DistrictEntityID","float64"],
-    'School Name': ["SchoolName","object"],
-    'School Entity ID': ["SchoolEntityID","float64"],
-    'Asian': ["Asian","float64"],
-    'American Indian/Alaskan Native': ["NativeAmerican","float64"],
-    'Black/African American': ["Black","float64"],
-    'Hispanic/Latino': ["Hispanic","float64"],
-    'White': ["White","float64"],
-    'Native Hawaiian/Pacific Islander': ["PacificIslander","float64"],
-    'Multiple Races': ["Multiracial","float64"],
+    'Fiscal Year': ["FiscalYear", "int64"],
+    'LEA Name': ["DistrictName", "object"],
+    'LEA Entity ID': ["DistrictEntityID", "float64"],
+    'School Name': ["SchoolName", "object"],
+    'School Entity ID': ["SchoolEntityID", "float64"],
+    'Asian': ["Asian", "float64"],
+    'American Indian/Alaskan Native': ["NativeAmerican", "float64"],
+    'Black/African American': ["Black", "float64"],
+    'Hispanic/Latino': ["Hispanic", "float64"],
+    'White': ["White", "float64"],
+    'Native Hawaiian/Pacific Islander': ["PacificIslander", "float64"],
+    'Multiple Races': ["Multiracial", "float64"],
     'Total': ["Total", "float64"]
 }
 
@@ -36,7 +48,7 @@ ethnicity_column_dict = {
 def main():
 
     try:
-        ### Import files
+        # Import files
         file_name = "schools_by_ethnicity.csv"
         import_date = date.today()
 
@@ -58,12 +70,18 @@ def main():
 
         # Call check_length_of_data
         check_length_of_data(ee_df)
- 
+
         # Call check_for_duplicates
         check_for_duplicates(ee_df)
 
         # Call count_unique_sites
         count_unique_sites(ee_df)
+
+        sum_totals = total_subgroups(ee_df)
+        print(sum_totals)
+
+        # Call the graph_subgroups_sums
+        graph_subgroups_sums(sum_totals)
 
         # Call add_schoolyear
         add_schoolyear(ee_df)
@@ -73,7 +91,7 @@ def main():
         add_county_fields(ee_df)
         # print(ee_df.head())
 
-        # Call add_import_date 
+        # Call add_import_date
         add_import_date(ee_df, import_date)
         print(ee_df.head())
 
@@ -106,6 +124,7 @@ def read_enrollment_ethnicity(file_name):
     # Return the dataframe that contains the lines from csv.
     return df
 
+
 def change_column_names(dataframe, dictionary):
     """Change column names to standardized database names
 
@@ -126,8 +145,9 @@ def change_column_names(dataframe, dictionary):
     for key, value in names_dict.items():
         for name in df.columns:
             if name == key:
-                df.rename(columns={name : value}, inplace=True)
+                df.rename(columns={name: value}, inplace=True)
     return df
+
 
 def check_for_nulls(dataframe):
     """Check columns that are not float or int for null values.
@@ -152,6 +172,7 @@ def check_for_nulls(dataframe):
 
     return df
 
+
 def check_length_of_data(dataframe):
     """Check the max length of the data length in columns 
     that are not float or int for null values.
@@ -174,6 +195,7 @@ def check_length_of_data(dataframe):
     print(df.info())
     return length_list
 
+
 def check_for_duplicates(dataframe):
     """Check for duplicate values in columns SchoolEntityID and DistrictEntityID
     This is a data integrity check.
@@ -189,10 +211,12 @@ def check_for_duplicates(dataframe):
     # count duplicate values in points column
     print()
     sl = len(df["SchoolEntityID"])-len(df["SchoolEntityID"].drop_duplicates())
-    dl = len(df["DistrictEntityID"])-len(df["DistrictEntityID"].drop_duplicates())
+    dl = len(df["DistrictEntityID"]) - \
+        len(df["DistrictEntityID"].drop_duplicates())
     print(f"DistrictEntityID # Duplicate Values: {dl}")
     print(f"SchoolEntityID # Duplicate Values: {sl}")
     print()
+
 
 def count_unique_sites(dataframe):
     """Find the number of unique values in columns SchoolEntityID and DistrictEntityID
@@ -210,6 +234,7 @@ def count_unique_sites(dataframe):
     print(f"Schools Count: {schools}")
     print(f"Districts Count: {districts}")
     print()
+
 
 def add_schoolyear(dataframe):
     """Add the column named "SchoolYear" and the data to dataframe
@@ -229,6 +254,7 @@ def add_schoolyear(dataframe):
 
     return df
 
+
 def add_county_fields(dataframe):
     """Add the columns named "CountyEntityID" and "CountyName" to the dataframe
     Empty data fields
@@ -244,6 +270,7 @@ def add_county_fields(dataframe):
     df["CountyName"] = ""
 
     return df
+
 
 def add_import_date(dataframe, import_date):
     """Add the columns named "ImportDate" and the date to the dataframe
@@ -262,6 +289,7 @@ def add_import_date(dataframe, import_date):
 
     return df
 
+
 def export_to_csv(dataframe, file_name):
     """Export the final dataframe to csv file
 
@@ -279,8 +307,78 @@ def export_to_csv(dataframe, file_name):
 
     return csv
 
+
+def total_subgroups(dataframe):
+    """Sum the columns and create new dataframe with just sums
+
+    Parameters
+        dataframe: the name of the dataframe
+    Return: new dataframe
+    """
+    # define new dataframe for connivance
+    df = dataframe
+
+    list = ["Asian", "NativeAmerican", "Black", "Hispanic",
+                "White", "PacificIslander", "Multiracial", "Total"]
+    list2 = ["Asian", "NativeAmerican", "Black", "Hispanic",
+                "White", "PacificIslander", "Multiracial"]
+    # Find state totals column and sum up
+    tdf = df[df['DistrictName'] == "Arizona"]
+    az = tdf[list2].sum(axis=0, numeric_only=True)
+    state = pd.DataFrame({"State Totals": az})
+    state.loc["Total"]=state.sum(axis=0)
+    # print(state)
+
+    # Filter column ("SchoolsEntityID) where rows are NaN
+    df = df[df['SchoolEntityID'].notnull()]
+    # Sum only the columns listed in new filtered dataframe
+    sum = df[list].sum(axis=0, numeric_only=True)
+    all = pd.DataFrame({"Redaction Totals": sum})
+
+    result = pd.concat([state, all], axis=1, join='inner')
+    # print(result)
+    result["dif"] = result["State Totals"] - result["Redaction Totals"]
+    
+    return result
+
+def graph_subgroups_sums(dataframe):
+    """Plot the subgroups sum dataframe
+    Show State totals and Redaction totals
+
+    Parameters
+        dataframe: the name of the dataframe
+    Return: graph
+    """
+    # define new dataframe for connivance
+    df = dataframe
+
+    # Set the figure size - handy for larger output
+    plt.rcParams["figure.figsize"] = [12, 6]
+    plt.rcParams['axes.formatter.useoffset'] = False
+    plt.rcParams["figure.autolayout"] = True
+
+    # ax = df.plot(kind='bar')
+    ax = df.plot(y=["State Totals", "Redaction Totals"],kind='bar')
+    plt.xticks(rotation=0, horizontalalignment="center")
+    plt.title("Total Enrollment by Ethnicity")
+    plt.ylabel("Total Students")
+    plt.xlabel("Ethnicity")
+    plt.ylim(0, 1200000)
+    plt.ticklabel_format(style='plain', axis='y')
+    
+    ax.yaxis.set_major_formatter(mpl.ticker.StrMethodFormatter('{x:,.0f}'))
+
+    container0 = ax.containers[0]
+    ax.bar_label(container0, rotation=80, padding=5, labels=[f'{x:,.0f}' for x in container0.datavalues])
+
+    container1 = ax.containers[1]
+    ax.bar_label(container1, rotation=80, padding=5, labels=[f'{x:,.0f}' for x in container1.datavalues])
+
+    plt.show()
+
+
 # If this file was executed like this:
-# > project.py
+# > final_project.py
 # then calls the main function. However, if this file
 # was simply imported, then skip the call to main.
 if __name__ == "__main__":

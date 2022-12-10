@@ -1,0 +1,57 @@
+
+Reference Documentation for final_project.py
+==============
+***Date: 2022-12-10***
+***File: reference.md***
+***Author: Vern Wolfley***
+***Class: CSE 111***
+***Purpose:  Reference Documentation for final_project.py***
+
+
+### Number of Hours Worked on Project
+    - week 11 - 3 hours
+    - week 12 - 6 hours
+    - week 13 - 10 hours
+    - Total = 19 hours
+
+### A description or list of the work that you finished on your program.
+
+This project imports a csv file (schools_by_ethnicity) and performs some data analysis to prepare the data for export.  This data analysis checks the column names against a dictionary and changes the names to ensure standardization of names in the database.  It then checks for null values in the none float and integer columns and removes them so further checks can such as length check to ensure that the string data does not exceed the database limit.  It then does a check for duplicates in the entityid fields to ensure that the data is unique.  It then produces a count of the unique sites.  It produces a total of the subgroups to then graph them for visualization.  Then specific fields are added to the database some with values and some just empty columns.  This final dataframe is then exported to a csv file.
+
+Project files should include:
+    - schools_by_ethnicity.csv
+    - final_project.py
+    - test_final_project.py
+    - reference.txt
+
+List of functions
+    - read_enrollment_ethnicity
+    - change_column_names
+    - check_for_nulls
+    - check_length_of_data
+    - check_for_duplicates
+    - count_unique_sites
+    - total_subgroups
+    - graph_subgroups_sums
+    - add_schoolyear
+    - add_county_fields
+    - add_import_date
+    - export_to_csv
+
+List of test functions
+    - test_file_import
+    - test_change_column_names
+    - test_check_length_of_data
+    - test_add_schoolyear
+
+### A list of the documentation that you read, the videos that you watched, and the coding experiments that you tried.
+
+#### Reference Docs
+    - https://towardsdatascience.com/advanced-tips-on-how-to-read-csv-files-into-pandas-84ebb170f6e5
+    - https://queirozf.com/entries/pandas-dataframe-plot-examples-with-matplotlib-pyplot
+    - https://pandas.pydata.org/
+    - https://matplotlib.org/
+    - https://stackoverflow.com/
+    - https://datagy.io/pandas-sum/
+    - https://www.shanelynn.ie/bar-plots-in-python-using-pandas-dataframes/
+    - lots of other google searches that were not recorded

@@ -1,12 +1,12 @@
 ####################
 # Date: 2022-12-10
-# File: test_project.py
+# File: test_final_project.py
 # Author: Vern Wolfley
 # Class: CSE 111
 # Purpose: Testing for project
 #####################
 
-from project import read_enrollment_ethnicity, add_schoolyear, change_column_names, check_length_of_data, check_for_nulls
+from final_project import read_enrollment_ethnicity, add_schoolyear, change_column_names, check_length_of_data, check_for_nulls
 import pandas as pd
 import pytest
 
