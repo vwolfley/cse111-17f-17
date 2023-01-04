@@ -5,6 +5,7 @@
 My repository for BYUI CSE111 class projects
 
 ## CSE 111 - Programming with Functions
+#### Fall 2023
 
 ### Topics
 `byui` `cse111` `school` `fall` `school-project` `school-assignments` `school-education` `python3`
